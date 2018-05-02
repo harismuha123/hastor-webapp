@@ -55,7 +55,7 @@
 
     	<div class="sidebar-wrapper">
             <div class="logo">
-                <a href="#dashboard" class="simple-text">
+                <a href="#homepage" class="simple-text">
                     <img src="assets/img/fondacija/logo-copy.png" alt="fondacija-slika">
                 </a>
             </div>
@@ -65,12 +65,6 @@
                     <a  href="#homepage">
                         <i class="pe-7s-home"></i>
                         <p>Početna</p>
-                    </a>
-                </li>
-                <li id="dashboard-link">
-                    <a  href="#dashboard">
-                        <i class="pe-7s-home"></i>
-                        <p>Admin panel</p>
                     </a>
                 </li>
                 <li id="table-link" >
@@ -91,17 +85,19 @@
                         <p>Izvještaji</p>
                     </a>
                 </li>
-                <li>
-                    <a href="#">
+                <li class="dropdown">
+                    <a id="admin-functions" href="#" class="dropdown-toggle nav-link aria" data-toggle="dropdown" aria-expanded="false">
                         <i class="pe-7s-note2"></i>
-                        <p>Evidencija</p>
+                        <p>Evidencija <b class="caret"></b> </p>
                     </a>
-                </li>
-                <li id="user-link" >
-                    <a href="#user">
-                        <i class="pe-7s-user"></i>
-                        <p>Moj Profil</p>
-                    </a>
+                    <ul id="edit-profile" class="hidden">
+                        <li id="user-link" style="list-style-type: none;">
+                            <a href="#user">
+                                <i class="pe-7s-user"></i>
+                                <p>Kreiraj Profil</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
                     <a href="#">
@@ -169,7 +165,6 @@
             <div class="container-fluid">
                 <main id="spapp" role="main">
                     <section id="homepage" data-load="homepage.html"></section>
-                    <section id="dashboard" data-load="dashboard_admin.html"></section>
                     <section id="user" data-load="user.html"></section>
                     <section id="table" data-load="table.html"></section>
                 </main>
@@ -243,7 +238,7 @@
             pageNotFound : "error_404"
         });
 
-        $(['dashboard_admin', 'user', 'table', 'homepage']).each(function(index, name){
+        $(['user', 'table', 'homepage']).each(function(index, name){
             app.route({
                 view : name,
                 load : name+".html",
@@ -257,7 +252,7 @@
                     var content = "";
 
                     switch(name) {
-                        case "dashboard_admin":
+                        case "homepage":
                             content = "Početna";
                             break;
                         case "user":
@@ -275,6 +270,22 @@
             });
         });
         app.run();
+
+        var isClicked = false;
+
+        $("#admin-functions").click(function () {
+            if (isClicked) {
+                $(this).attr("class", "dropdown");
+                $(".aria").attr("aria-expanded", "false");
+                $("#edit-profile").attr("class", "hidden");
+                isClicked = false;
+            } else {
+                $(this).attr("class", "dropdown open");
+                $("#aria").attr("aria-expanded", "true");
+                $("#edit-profile").attr("class", "");
+                isClicked = true;
+            }
+        });
 	</script>
 
 </html>
