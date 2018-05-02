@@ -65,3 +65,7 @@
         position: initial;
     }
 }
+
+.error{
+    color: red;
+}
