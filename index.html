@@ -23,6 +23,8 @@
     <!--  CSS for Demo Purpose, don't include it in your project     -->
     <link href="assets/css/demo.css" rel="stylesheet" />
 
+    <!-- DataTable CSS -->
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
 
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -39,6 +41,9 @@
     <!--JQuery Validate Plugin-->
     <script src="assets/js/jquery.validate.min.js"></script>
     <script src="assets/js/additional-methods.min.js"></script>
+
+    <!-- DataTable JS -->
+    <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 
 </head>
 <body>
@@ -228,8 +233,6 @@
 
     <!--  Custom JS  -->
     <script src="assets/js/dashboard.js"></script>
-    <script src="assets/js/create_profile.js"></script>
-    <script src="assets/js/homepage.js"></script>
 
 	<script type="text/javascript">
         var app = $.spapp({
@@ -264,6 +267,30 @@
                         default:
                             content = "Početna";
                     }
+
+                    $.get("rest/front_page", function (data) {
+                        var html = "";
+                        for(var i = 0; i < data.length; i++) {
+                            if(i !== 0 && i % 3 === 0) {
+                                html += "</div>\n" +
+                                    "    <div class=\"clearfix visible-md-block\"></div>" +
+                                    "    <div class='row'></div>";
+                            }
+                            html += "<div class=\"col-md-4\">\n" +
+                                "        <div class=\"card card-price\">\n" +
+                                "            <div class=\"image\">\n" +
+                                "                <img src='"+ data[i].image + "' alt=\"...\"/>\n" +
+                                "            </div>\n" +
+                                "            <div class=\"content\">\n" +
+                                "                 <h5 class=\"title\"><a href='"+ data[i].about +"' target='_blank'>" + data[i].title +"</h5>\n" +
+                                "            </div>\n" +
+                                "        </div>\n" +
+                                "    </div>";
+                        }
+                        $(".homepage").html(html);
+                    });
+
+                    $("#najava-table").DataTable();
 
                     $('.dynamic-namebar').html("<a id=\"header-name\" class=\"navbar-brand\" href=\"#" + name + "\">Fondacija Hastor  |  " + content + "</a>")
                 }
