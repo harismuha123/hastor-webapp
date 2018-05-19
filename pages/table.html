@@ -2,65 +2,111 @@
     <div class="col-md-12">
         <div class="card">
             <div class="header">
-                <h4 class="title">Striped Table with Hover</h4>
-                <p class="category">Here is a subtitle for this table</p>
+                <h4 class="title">Stipendisti</h4>
+                <p class="category">Izaberite kategoriju na desnoj strani</p>
             </div>
-            <div class="content table-responsive table-full-width">
-                <table id="najava-table" class="table table-hover table-striped">
-                    <thead>
-                    <th>Ime i prezime</th>
-                    <th>Grad</th>
-                    <th>Adresa</th>
-                    <th>Datum</th>
-                    <th>Vrijeme</th>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Dakota Rice</td>
-                        <td>$36,738</td>
-                        <td>Niger</td>
-                        <td>Oud-Turnhout</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Minerva Hooper</td>
-                        <td>$23,789</td>
-                        <td>Curaçao</td>
-                        <td>Sinaai-Waas</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Sage Rodriguez</td>
-                        <td>$56,142</td>
-                        <td>Netherlands</td>
-                        <td>Baileux</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Philip Chaney</td>
-                        <td>$38,735</td>
-                        <td>Korea, South</td>
-                        <td>Overland Park</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Doris Greene</td>
-                        <td>$63,542</td>
-                        <td>Malawi</td>
-                        <td>Feldkirchen in Kärnten</td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>Mason Porter</td>
-                        <td>$78,615</td>
-                        <td>Chile</td>
-                        <td>Gloucester</td>
-                    </tr>
-                    </tbody>
-                </table>
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item">
+                        <a id="middle-school" class="nav-link" href="#">Osnovna škola</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Srednja škola</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="university" class="nav-link" href="#">Fakultet</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="content table-responsive table-full-width">
+                    <table id="najava-table" class="table table-hover table-striped">
+                        <thead>
+                        <th>ID</th>
+                        <th>Ime i prezime</th>
+                        <th>Grad</th>
+                        <th>Adresa</th>
+                        <th>E-mail</th>
+                        <th>Broj telefona</th>
+                        <th>Škola/Univerzitet</th>
+                        <th>Razred/Godina</th>
+                        <th>Prosjek</th>
+                        <th></th>
+                        </thead>
+                        <tbody id="users-body">
 
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 </div>
+</div>
+<script>
+
+    $(function () {
+
+        $.get("rest/school_students", function (data) {
+            var html = '';
+            $('#users-body').html(html);
+            for(var i = 0 ; i < data.length; i++){
+                html += '<tr>\n<td>'+data[i].id+'</td>\n';
+                html += '<td>'+data[i].name+' '+data[i].surname+'</td>\n';
+                html += '   <td>'+data[i].city_id+'</td>\n';
+                html += '  <td>'+data[i].address+'</td>\n';
+                html += '  <td>'+data[i].email+'</td>\n';
+                html += '  <td>'+data[i].tel1+'</td>\n';
+                html += '  <td>'+data[i].school_id+'</td>\n';
+                html += '  <td>'+data[i].year_of_study+'</td>\n';
+                html += '  <td>'+data[i].gpa+'</td>\n';
+                html += '  <td><button onclick="delete_user('+data[i].id+')" class="btn btn-danger">Delete</button></td>\n</tr>';
+            }
+
+            $('#users-body').html(html);
+        });
+
+        $("#middle-school").click(function () {
+            $.get("rest/school_students", function (data) {
+                var html = '';
+                $('#users-body').html(html);
+                for(var i = 0 ; i < data.length; i++){
+                    html += '<tr>\n<td>'+data[i].id+'</td>\n';
+                    html += '<td>'+data[i].name+' '+data[i].surname+'</td>\n';
+                    html += '   <td>'+data[i].city_id+'</td>\n';
+                    html += '  <td>'+data[i].address+'</td>\n';
+                    html += '  <td>'+data[i].email+'</td>\n';
+                    html += '  <td>'+data[i].tel1+'</td>\n';
+                    html += '  <td>'+data[i].school_id+'</td>\n';
+                    html += '  <td>'+data[i].year_of_study+'</td>\n';
+                    html += '  <td>'+data[i].gpa+'</td>\n';
+                    html += '  <td><button onclick="delete_user('+data[i].id+')" class="btn btn-danger">Delete</button></td>\n</tr>';
+                }
+
+                $('#users-body').html(html);
+            });
+        });
+        $("#university").click(function () {
+            $.get("rest/university_students", function (data) {
+                var html = '';
+                $('#users-body').html(html);
+                for(var i = 0 ; i < data.length; i++){
+                    html += '<tr>\n<td>'+data[i].id+'</td>\n';
+                    html += '<td>'+data[i].name+' '+data[i].surname+'</td>\n';
+                    html += '   <td>'+data[i].city_id+'</td>\n';
+                    html += '  <td>'+data[i].address+'</td>\n';
+                    html += '  <td>'+data[i].email+'</td>\n';
+                    html += '  <td>'+data[i].tel1+'</td>\n';
+                    html += '  <td>'+data[i].university_id+'</td>\n';
+                    html += '  <td>'+data[i].year_of_study+'</td>\n';
+                    html += '  <td>'+data[i].gpa+'</td>\n';
+                    html += '  <td><button onclick="delete_user('+data[i].id+')" class="btn btn-danger">Delete</button></td>\n</tr>';
+                }
+
+                $('#users-body').html(html);
+            });
+        });
+    });
+
+    // $("#najava-table").DataTable();
+</script>

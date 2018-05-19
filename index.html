@@ -44,6 +44,9 @@
 
     <!-- DataTable JS -->
     <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script>
+        // window.location.replace("./pages/login.html");
+    </script>
 
 </head>
 <body>
@@ -290,8 +293,6 @@
                         $(".homepage").html(html);
                     });
 
-                    $("#najava-table").DataTable();
-
                     $('.dynamic-namebar').html("<a id=\"header-name\" class=\"navbar-brand\" href=\"#" + name + "\">Fondacija Hastor  |  " + content + "</a>")
                 }
             });
@@ -313,6 +314,7 @@
                 isClicked = true;
             }
         });
+
 	</script>
 
 </html>
