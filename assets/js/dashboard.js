@@ -46,8 +46,6 @@ $(document).ready(function(){
 
     $("#task-title").text("Zadaci za mjesec " + monthString + ", " + y + ".");
 
-    demo.initChartist();
-
     $.notify({
         icon: 'pe-7s-id',
         message: "Dobrodošli u <b>Administracioni Sistem Fondacije Hastor</b>."

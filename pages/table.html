@@ -2,111 +2,124 @@
     <div class="col-md-12">
         <div class="card">
             <div class="header">
-                <h4 class="title">Stipendisti</h4>
-                <p class="category">Izaberite kategoriju na desnoj strani</p>
+                <h4 class="title">Studenti</h4>
+                <p class="category">Izaberite jednu od kategorija</p>
             </div>
             <div class="card-header">
-                <ul class="nav nav-tabs card-header-tabs">
+                <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a id="middle-school" class="nav-link" href="#">Osnovna škola</a>
+                        <a class="nav-link active" data-toggle="tab" href="#currentPreferences">Osnovna škola</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Srednja škola</a>
+                        <a class="nav-link" data-toggle="tab" href="#alternative">Srednja škola</a>
                     </li>
                     <li class="nav-item">
-                        <a id="university" class="nav-link" href="#">Fakultet</a>
+                        <a class="nav-link" data-toggle="tab" href="#link">Fakultet</a>
                     </li>
                 </ul>
             </div>
             <div class="card-body">
-                <div class="content table-responsive table-full-width">
-                    <table id="najava-table" class="table table-hover table-striped">
-                        <thead>
-                        <th>ID</th>
-                        <th>Ime i prezime</th>
-                        <th>Grad</th>
-                        <th>Adresa</th>
-                        <th>E-mail</th>
-                        <th>Broj telefona</th>
-                        <th>Škola/Univerzitet</th>
-                        <th>Razred/Godina</th>
-                        <th>Prosjek</th>
-                        <th></th>
-                        </thead>
-                        <tbody id="users-body">
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="currentPreferences">
+                        <ul class="list-group media-list media-list-stream">
+                            <div class="content table-responsive table-full-width">
+                                <table id="osnovci-table" class="table table-hover table-striped">
+                                    <thead>
+                                    <th>ID</th>
+                                    <th>Ime</th>
+                                    <th>Prezime</th>
+                                    <th>Grad</th>
+                                    <th>Adresa</th>
+                                    <th>E-mail</th>
+                                    <th>Broj telefona</th>
+                                    <th>Škola/Univerzitet</th>
+                                    <th>Razred/Godina</th>
+                                    <th>Prosjek</th>
+                                    </thead>
+                                    <tbody id="osnovna-body">
 
-                        </tbody>
-                    </table>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </ul>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade in" id="alternative">
+                        <ul class="list-group media-list media-list-stream">
+                            <div class="content table-responsive table-full-width">
+                                <table id="srednjoskolci-table" class="table table-hover table-striped">
+                                    <thead>
+                                    <th>ID</th>
+                                    <th>Ime</th>
+                                    <th>Prezime</th>
+                                    <th>Grad</th>
+                                    <th>Adresa</th>
+                                    <th>E-mail</th>
+                                    <th>Broj telefona</th>
+                                    <th>Škola/Univerzitet</th>
+                                    <th>Razred/Godina</th>
+                                    <th>Prosjek</th>
+                                    </thead>
+                                    <tbody id="srednja-body">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </ul>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade in" id="link">
+                        <ul class="list-group media-list media-list-stream">
+                            <div class="content table-responsive table-full-width">
+                                <table id="studenti-table" class="table table-hover table-striped">
+                                    <thead>
+                                    <th>ID</th>
+                                    <th>Ime</th>
+                                    <th>Prezime</th>
+                                    <th>Grad</th>
+                                    <th>Adresa</th>
+                                    <th>E-mail</th>
+                                    <th>Broj telefona</th>
+                                    <th>Škola/Univerzitet</th>
+                                    <th>Razred/Godina</th>
+                                    <th>Prosjek</th>
+                                    </thead>
+                                    <tbody id="faks-body">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-</div>
 <script>
 
-    $(function () {
+   $(['osnovci', 'srednjoskolci', 'studenti']).each(function (index, name) {
+       $('#'+name+'-table').DataTable({
+           responsive: true,
+           autoWidth: false,
+           ajax:  {
+               url: 'rest/'+name,
+               dataSrc: 'students',
+               dom: 'rtip', // the "r" is for the "processing" message
+               processing: true, // you have to set this to true as well
+               serverSide: true
+           },
+           columns: [
+               { data: "id" },
+               { data: "name" },
+               { data: "surname" },
+               { data: "city" },
+               { data: "address" },
+               { data: "email" },
+               { data: "tel1" },
+               { data: "facility_name" },
+               { data: "year_of_study" },
+               { data: "gpa" }
+           ]
+       });
+   });
 
-        $.get("rest/school_students", function (data) {
-            var html = '';
-            $('#users-body').html(html);
-            for(var i = 0 ; i < data.length; i++){
-                html += '<tr>\n<td>'+data[i].id+'</td>\n';
-                html += '<td>'+data[i].name+' '+data[i].surname+'</td>\n';
-                html += '   <td>'+data[i].city_id+'</td>\n';
-                html += '  <td>'+data[i].address+'</td>\n';
-                html += '  <td>'+data[i].email+'</td>\n';
-                html += '  <td>'+data[i].tel1+'</td>\n';
-                html += '  <td>'+data[i].school_id+'</td>\n';
-                html += '  <td>'+data[i].year_of_study+'</td>\n';
-                html += '  <td>'+data[i].gpa+'</td>\n';
-                html += '  <td><button onclick="delete_user('+data[i].id+')" class="btn btn-danger">Delete</button></td>\n</tr>';
-            }
-
-            $('#users-body').html(html);
-        });
-
-        $("#middle-school").click(function () {
-            $.get("rest/school_students", function (data) {
-                var html = '';
-                $('#users-body').html(html);
-                for(var i = 0 ; i < data.length; i++){
-                    html += '<tr>\n<td>'+data[i].id+'</td>\n';
-                    html += '<td>'+data[i].name+' '+data[i].surname+'</td>\n';
-                    html += '   <td>'+data[i].city_id+'</td>\n';
-                    html += '  <td>'+data[i].address+'</td>\n';
-                    html += '  <td>'+data[i].email+'</td>\n';
-                    html += '  <td>'+data[i].tel1+'</td>\n';
-                    html += '  <td>'+data[i].school_id+'</td>\n';
-                    html += '  <td>'+data[i].year_of_study+'</td>\n';
-                    html += '  <td>'+data[i].gpa+'</td>\n';
-                    html += '  <td><button onclick="delete_user('+data[i].id+')" class="btn btn-danger">Delete</button></td>\n</tr>';
-                }
-
-                $('#users-body').html(html);
-            });
-        });
-        $("#university").click(function () {
-            $.get("rest/university_students", function (data) {
-                var html = '';
-                $('#users-body').html(html);
-                for(var i = 0 ; i < data.length; i++){
-                    html += '<tr>\n<td>'+data[i].id+'</td>\n';
-                    html += '<td>'+data[i].name+' '+data[i].surname+'</td>\n';
-                    html += '   <td>'+data[i].city_id+'</td>\n';
-                    html += '  <td>'+data[i].address+'</td>\n';
-                    html += '  <td>'+data[i].email+'</td>\n';
-                    html += '  <td>'+data[i].tel1+'</td>\n';
-                    html += '  <td>'+data[i].university_id+'</td>\n';
-                    html += '  <td>'+data[i].year_of_study+'</td>\n';
-                    html += '  <td>'+data[i].gpa+'</td>\n';
-                    html += '  <td><button onclick="delete_user('+data[i].id+')" class="btn btn-danger">Delete</button></td>\n</tr>';
-                }
-
-                $('#users-body').html(html);
-            });
-        });
-    });
-
-    // $("#najava-table").DataTable();
 </script>
