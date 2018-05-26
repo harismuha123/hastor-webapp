@@ -125,6 +125,13 @@ class PersistenceManager {
         $statement = $this->pdo->prepare($query);
         $statement->execute($input);
     }
+
+    public function get_all_reports() {
+        $query = "SELECT * FROM Reports AS rep
+                  INNER JOIN Reservations AS res ON rep.reservation_id = res.id
+                  WHERE res.is_accepted = 1";
+        return $this->pdo->query($query)->fetchAll();
+    }
 }
 
 ?>

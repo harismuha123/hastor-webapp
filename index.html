@@ -88,8 +88,8 @@
                         <p>Najave</p>
                     </a>
                 </li>
-                <li>
-                    <a href="#">
+                <li id="reports-link">
+                    <a href="#reports">
                         <i class="pe-7s-news-paper"></i>
                         <p>Izvještaji</p>
                     </a>
@@ -160,6 +160,7 @@
                     <section id="user" data-load="user.html"></section>
                     <section id="table" data-load="table.html"></section>
                     <section id="reservations" data-load="reservations.html"></section>
+                    <section id="reports" data-load="reports.html"></section>
                 </main>
             </div>
         </div>
@@ -333,7 +334,7 @@
             pageNotFound : "error_404"
         });
 
-        $(['user', 'table', 'homepage', 'reservations']).each(function(index, name){
+        $(['user', 'table', 'homepage', 'reservations', 'reports']).each(function(index, name){
             app.route({
                 view : name,
                 load : name+".html",
@@ -358,6 +359,9 @@
                             break;
                         case "reservations":
                             content = "Najave";
+                            break;
+                        case "reports":
+                            content = "Izvještaji";
                             break;
                         default:
                             content = "Početna";

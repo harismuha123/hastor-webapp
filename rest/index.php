@@ -73,6 +73,11 @@ Flight::route('GET /gradovi', function (){
     Flight::json($cities);
 });
 
+Flight::route('GET /svi_izvjestaji', function (){
+    $reports = Flight::pm()->get_all_reports();
+    Flight::json(array( "reports" => $reports));
+});
+
 Flight::route('POST /kreiraj_najavu', function () {
     $student = Flight::request()->data->volunteer;
     $city = Flight::request()->data->city;
