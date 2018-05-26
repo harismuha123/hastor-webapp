@@ -17,7 +17,7 @@
                         <a class="nav-link" data-toggle="tab" href="#prihvacene" style="color:lightseagreen;">Prihvaćene</a>
                     </li>
                     <li class="nav-item" style="float:right;line-height:45px;">
-                        <button type="button" data-toggle="modal" class="btn btn-success" data-target="#sampleModal">
+                        <button type="button" data-toggle="modal" class="add_button btn btn-success" data-target="#reportModal">
                             Dodaj najavu
                         </button>
                     </li>
@@ -119,12 +119,12 @@
                     { data: "to_hour" },
                     { data: "reservation_id",
                         render : function(data, type, row) {
-                            return '<button onclick="delete_reservation('+data+')" class="btn btn-primary">Pregledaj</button>'
+                            return '<button id="'+ data +'" data-toggle="modal" class="check_button btn btn-primary" data-target="#checkModal">Pregledaj</button>'
                         }
                     },
                     { data: "reservation_id",
                         render : function(data, type, row) {
-                            return '<button onclick="delete_reservation('+data+')" class="btn btn-danger">Obriši</button>'
+                            return '<button id="'+ data +'" class="delete_button btn btn-danger">Obriši</button>'
                         }
                     }
                 ]
@@ -134,10 +134,56 @@
         $.get("rest/gradovi", function (data) {
             $.each(data, function (index, item) {
                 $('#cities').append(
-                    $('<option></option>').val(item.city).html(item.city)
+                    $('<option></option>').val(item.id + " - " + item.city).html(item.id + " - " + item.city)
+                );
+                $('#cityName').append(
+                    $('<option></option>').val(item.id + " - " + item.city).html(item.id + " - " + item.city)
                 );
             });
         });
-    })
+
+        $.get("rest/volonteri", function (data) {
+            $.each(data, function (index, item) {
+                $('#volunteers').append(
+                    $('<option></option>').val(item.id + " - " + item.name + " " + item.surname).html(item.id + " - " + item.name + " " + item.surname)
+                );
+            });
+        });
+
+        $('.table tbody').on('click', '.check_button', function () {
+            var id = $(this).attr('id');
+            $(['pristigla', 'vracena', 'prihvacena']).each(function (index, name) {
+                $.get("rest/"+name+"_najava", function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        if(id === data[i].reservation_id) {
+                            $("#volunteerName").val(data[i].reservation_id + " - " + data[i].name + " " + data[i].surname);
+                            $("#volunteerSurname").val(data[i].surname);
+                            $("#cityName").val(data[i].city_id + " - " + data[i].city);
+                            $("#addressName").val(data[i].address);
+                            $("#dateName").val(data[i].for_date);
+                            $("#timeStart").val(data[i].from_hour);
+                            $("#timeEnd").val(data[i].to_hour);
+                            $("#sidenoteText").val(data[i].sidenote);
+
+                        }
+                    }
+                });
+            })
+        });
+
+        $('.table tbody').on('click', '.delete_button', function () {
+            var id = $(this).attr('id');
+            if (confirm("Jeste li sigurni?")){
+                $.ajax({url: "rest/obrisi_najavu/"+id, method: "DELETE" }).done(function( msg ) {
+                    $(['pristigle', 'vracene', 'prihvacene']).each(function (index, name) {
+                        $('#'+name+'-table').DataTable().ajax.reload();
+                    });
+                    alert("Najava uspješno obrisana!");
+                }).fail(function( jqXHR, textStatus ) {
+                    alert( "Request failed: " + textStatus );
+                });
+            }
+        });
+    });
 </script>
 
