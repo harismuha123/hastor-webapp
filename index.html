@@ -20,7 +20,7 @@
     <link href="assets/css/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet"/>
 
     <!-- DataTable CSS -->
-    <link rel="stylesheet" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.16/r-2.2.1/rr-1.2.3/datatables.min.css"/>
 
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -42,7 +42,7 @@
     <script src="assets/js/additional-methods.min.js"></script>
 
     <!-- DataTable JS -->
-    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/r-2.2.1/rr-1.2.3/datatables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.16/r-2.2.1/rr-1.2.3/datatables.min.js"></script>
 
 
     <script>
@@ -108,12 +108,6 @@
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a href="#">
-                        <i class="pe-7s-bell"></i>
-                        <p>Obavijesti</p>
-                    </a>
-                </li>
             </ul>
     	</div>
     </div>
@@ -138,11 +132,6 @@
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li>
-                           <a href="#">
-                               <p>Pomoć</p>
-                            </a>
-                        </li>
                         <li>
                             <a href="#">
                                 <p>Odjavi se</p>
@@ -313,6 +302,71 @@
         </div>
 
     </div>
+
+    <div id="messageModal" class="fade modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Header -->
+                <div class="modal-header">
+                    <h2 class="modal-title">Provjeri izvještaj</h2>
+                    <p class="category">Uredite i pregledajte izvještaj</p>
+                </div>
+                <!-- Body -->
+                <div class="modal-body">
+                    <form class="form" id="message-form" role="form" action="rest/kreiraj_izvjestaj" method="post">
+                        <div class="form-group">
+                            <label>Volonter</label>
+                            <select class="form-control" id="vNames" name="volunteer">
+
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Cilj rada</label>
+                            <textarea class="form-control" name="goal_of_session" rows="5" cols="5" id="sessionGoal" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Volonterske aktivnosti</label>
+                            <textarea class="form-control" name="volunteer_activities" rows="15" cols="15" id="volunteerActivities" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Napomena</label>
+                            <textarea class="form-control" name="sidenote" rows="5" cols="5" id="sNote" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Prisustvo</label>
+                            <textarea class="form-control" name="attendance_comment" rows="5" cols="5" id="attComment" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Ocjena</label>
+                            <select class="form-control" id="grade" name="grade">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Komentar Administracije</label>
+                            <textarea class="form-control" name="administration_comment" rows="10" cols="10" id="adminComment" required></textarea>
+                        </div>
+                        <hr>
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <button type="button" data-dismiss="modal" class="close_button btn btn-default btn-lg btn-block">Zatvori</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-success btn-lg btn-block">Predaj</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- Footer -->
+            <div class="modal-footer"></div>
+        </div>
+
+    </div>
 </body>
     <!--  Notifications Plugin    -->
     <script src="assets/js/bootstrap-notify.js"></script>
@@ -460,6 +514,44 @@
                         });
                         alert("Uspješno ažurirana najava!");
                         $('#checkModal').modal('hide');
+                    });
+                    return false;
+                }
+            }
+        });
+
+        function resetList(){
+            $.get("rest/potvrdjeni_studenti", function (data) {
+                $('#vNames').empty();
+                $.each(data, function (index, item) {
+                    $('#vNames').append(
+                        $('<option></option>').val(item.reservation_id + " - " + item.name + " " + item.surname).html(item.reservation_id + " - " + item.name + " " + item.surname)
+                    );
+                });
+            });
+        }
+
+        $('#message-form').validate({
+            rules: {
+                address: {
+                    required: true,
+                    minlength: 5,
+                    maxlength: 80
+                }
+            },
+            messages: {
+
+            },
+            submitHandler: function(form) {
+                if (confirm('Da li ste sigurni da želite nastaviti?')){
+                    resetList();
+                    $.post('rest/kreiraj_izvjestaj', $('#message-form').serialize(), function(){
+                        $('#message-form').trigger('reset');
+                        $(['aktivni', 'kompletirani']).each(function (index, name) {
+                            $('#'+name+'-table').DataTable().ajax.reload();
+                        });
+                        alert("Uspješno dodan izvještaj!");
+                        $('#messageModal').modal('hide');
                     });
                     return false;
                 }

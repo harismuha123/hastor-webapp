@@ -28,6 +28,11 @@ Flight::route('GET /volonteri', function (){
     Flight::json($volunteers);
 });
 
+Flight::route('GET /potvrdjeni_studenti', function (){
+    $volunteers = Flight::pm()->get_confirmed_reservations();
+    Flight::json($volunteers);
+});
+
 Flight::route('GET /srednjoskolci', function (){
     $school_students = Flight::pm()->get_all_highschool_students();
     Flight::json(array("students" => $school_students));
@@ -73,9 +78,19 @@ Flight::route('GET /gradovi', function (){
     Flight::json($cities);
 });
 
-Flight::route('GET /svi_izvjestaji', function (){
+Flight::route('GET /aktivni', function (){
     $reports = Flight::pm()->get_all_reports();
     Flight::json(array( "reports" => $reports));
+});
+
+Flight::route('GET /kompletirani', function (){
+    $reports = Flight::pm()->get_completed_reports();
+    Flight::json(array( "reports" => $reports));
+});
+
+Flight::route('GET /izvjestaj/@id', function ($id){
+    $report = Flight::pm()->get_report_data($id);
+    Flight::json($report);
 });
 
 Flight::route('POST /kreiraj_najavu', function () {
@@ -94,6 +109,23 @@ Flight::route('POST /kreiraj_najavu', function () {
     );
     $dataArray = Flight::pm()->create_reservation($input, $studentArray[0]);
     Flight::pm()->add_mentor($dataArray);
+});
+
+Flight::route('POST /kreiraj_izvjestaj', function () {
+    $student = Flight::request()->data->volunteer;
+    $request = Flight::request();
+    $studentArray = explode(" ", $student);
+    $input = array(
+        "goal_of_session" => $request->data->goal_of_session,
+        "volunteer_activities" => $request->data->volunteer_activities,
+        "sidenote" => $request->data->sidenote,
+        "attendance_comment" => $request->data->goal_of_session,
+        "grade" => $request->data->grade,
+        "administration_comment" => $request->data->administration_comment,
+        "reservation_id" => $studentArray[0]
+    );
+    Flight::pm()->create_report($input);
+    Flight::pm()->finalize_reservation($studentArray[0]);
 });
 
 Flight::route('DELETE /obrisi_najavu/@id', function($id){

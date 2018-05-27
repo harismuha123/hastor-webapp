@@ -14,7 +14,7 @@
                         <a class="nav-link" data-toggle="tab" href="#kompletirani" style="color:red;">Kompletirani</a>
                     </li>
                     <li class="nav-item" style="float:right;line-height:45px;">
-                        <button type="button" data-toggle="modal" class="add_button btn btn-success" data-target="#messageModal">
+                        <button type="button" onclick="fillList()" data-toggle="modal" class="add_report btn btn-success" data-target="#messageModal">
                             Dodaj izvještaj
                         </button>
                     </li>
@@ -73,6 +73,49 @@
 </div>
 <script>
 
+    $(['aktivni', 'kompletirani']).each(function (index, name) {
+        $('#'+name+'-table').DataTable({
+            responsive: true,
+            autoWidth: false,
+            ajax:  {
+                url: 'rest/'+name,
+                dataSrc: 'reports',
+                dom: 'rtip', // the "r" is for the "processing" message
+                processing: true, // you have to set this to true as well
+                serverSide: true
+            },
+            columns: [
+                { data: "name" },
+                { data: "surname" },
+                { data: "city" },
+                { data: "address" },
+                { data: "for_date" },
+                { data: "from_hour" },
+                { data: "to_hour" },
+                { data: "reservation_id",
+                    render : function(data, type, row) {
+                        return '<button id="'+ data +'" data-toggle="modal" class="check_button btn btn-primary" data-target="#messageModal">Pregledaj</button>'
+                    }
+                },
+                { data: "reservation_id",
+                    render : function(data, type, row) {
+                        return '<button id="'+ data +'" class="delete_button btn btn-danger">Obriši</button>'
+                    }
+                }
+            ]
+        });
+    });
+
+    function fillList() {
+        $.get("rest/potvrdjeni_studenti", function (data) {
+            $('#vNames').empty();
+            $.each(data, function (index, item) {
+                $('#vNames').append(
+                    $('<option></option>').val(item.reservation_id + " - " + item.name + " " + item.surname).html(item.reservation_id + " - " + item.name + " " + item.surname)
+                );
+            });
+        });
+    }
 
 
 </script>
