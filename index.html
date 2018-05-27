@@ -313,7 +313,7 @@
                 </div>
                 <!-- Body -->
                 <div class="modal-body">
-                    <form class="form" id="message-form" role="form" action="rest/kreiraj_izvjestaj" method="post">
+                    <form class="form" id="message-form" role="form">
                         <div class="form-group">
                             <label>Volonter</label>
                             <select class="form-control" id="vNames" name="volunteer">
@@ -357,6 +357,75 @@
                             </div>
                             <div class="col-md-6">
                                 <button type="submit" class="btn btn-success btn-lg btn-block">Predaj</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- Footer -->
+            <div class="modal-footer"></div>
+        </div>
+
+    </div>
+    <div id="reportCheckModal" class="fade modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Header -->
+                <div class="modal-header">
+                    <h2 class="modal-title">Provjeri izvještaj</h2>
+                    <p class="category">Uredite i pregledajte izvještaj</p>
+                </div>
+                <!-- Body -->
+                <div class="modal-body">
+                    <form class="form" id="check-report-form" role="form">
+                        <div class="form-group">
+                            <label>Volonter</label>
+                            <input type="text" class="form-control" id="vName" name="volunteer" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Cilj rada</label>
+                            <textarea class="form-control" name="goal_of_session" rows="5" cols="5" id="sessGoal" readonly></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Volonterske aktivnosti</label>
+                            <textarea class="form-control" name="volunteer_activities" rows="15" cols="15" id="volActivities" readonly></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Napomena</label>
+                            <textarea class="form-control" name="sidenote" rows="5" cols="5" id="sideNote" readonly></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Prisustvo</label>
+                            <textarea class="form-control" name="attendance_comment" rows="5" cols="5" id="attrComment" readonly></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Ocjena</label>
+                            <select class="form-control" id="gradeNum" name="grade">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Komentar Administracije</label>
+                            <textarea class="form-control" name="administration_comment" rows="10" cols="10" id="administratorComment" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Prihvaćeno</label>
+                            <select class="form-control" id="is_accepted" name="is_accepted">
+                                <option value="Da">Da</option>
+                                <option value="Ne">Ne</option>
+                            </select>
+                        </div>
+                        <hr>
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <button type="button" data-dismiss="modal" class="close_button btn btn-default btn-lg btn-block">Zatvori</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-success btn-lg btn-block">Finaliziraj</button>
                             </div>
                         </div>
                     </form>
@@ -510,7 +579,7 @@
                     $.post('rest/pregledaj_najavu', $('#update-form').serialize(), function(){
                         $('#update-form').trigger('reset');
                         $(['pristigle', 'vracene', 'prihvacene']).each(function (index, name) {
-                            $('#'+name+'-table').DataTable().ajax.reload();
+                             $('#'+name+'-table').DataTable().ajax.reload();
                         });
                         alert("Uspješno ažurirana najava!");
                         $('#checkModal').modal('hide');
@@ -520,20 +589,17 @@
             }
         });
 
-        function resetList(){
-            $.get("rest/potvrdjeni_studenti", function (data) {
-                $('#vNames').empty();
-                $.each(data, function (index, item) {
-                    $('#vNames').append(
-                        $('<option></option>').val(item.reservation_id + " - " + item.name + " " + item.surname).html(item.reservation_id + " - " + item.name + " " + item.surname)
-                    );
-                });
-            });
-        }
-
         $('#message-form').validate({
             rules: {
-                address: {
+                goal_of_session: {
+                    required: true,
+                    minlength: 5
+                },
+                volunteer_activities: {
+                    required: true,
+                    minlength: 5
+                },
+                attendance_comment: {
                     required: true,
                     minlength: 5,
                     maxlength: 80
@@ -544,7 +610,6 @@
             },
             submitHandler: function(form) {
                 if (confirm('Da li ste sigurni da želite nastaviti?')){
-                    resetList();
                     $.post('rest/kreiraj_izvjestaj', $('#message-form').serialize(), function(){
                         $('#message-form').trigger('reset');
                         $(['aktivni', 'kompletirani']).each(function (index, name) {
@@ -552,6 +617,40 @@
                         });
                         alert("Uspješno dodan izvještaj!");
                         $('#messageModal').modal('hide');
+                    });
+                    return false;
+                }
+            }
+        });
+
+        $('#check-report-form').validate({
+            rules: {
+                goal_of_session: {
+                    required: true,
+                    minlength: 5
+                },
+                volunteer_activities: {
+                    required: true,
+                    minlength: 5
+                },
+                attendance_comment: {
+                    required: true,
+                    minlength: 5,
+                    maxlength: 80
+                }
+            },
+            messages: {
+
+            },
+            submitHandler: function(form) {
+                if (confirm('Da li ste sigurni da želite nastaviti?')){
+                    $.post('rest/pregledaj_izvjestaj', $('#check-report-form').serialize(), function(){
+                        $('#check-report-form').trigger('reset');
+                        $(['aktivni', 'kompletirani']).each(function (index, name) {
+                            $('#'+name+'-table').DataTable().ajax.reload();
+                        });
+                        alert("Uspješno pregledan izvještaj!");
+                        $('#reportCheckModal').modal('hide');
                     });
                     return false;
                 }

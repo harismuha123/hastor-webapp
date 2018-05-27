@@ -134,14 +134,41 @@ class PersistenceManager {
         $statement->execute($input);
     }
 
+    public function delete_report($id) {
+        $query = "DELETE FROM Reports WHERE reservation_id = ?";
+        $statement = $this->pdo->prepare($query);
+        $statement->execute([$id]);
+    }
+
+    public function update_reservation($id) {
+        $query = "UPDATE Reservations
+                  SET report_accepted = NULL
+                  WHERE id = ?";
+        $statement = $this->pdo->prepare($query);
+        $statement->execute([$id]);
+    }
+
     public function check_reservation($input) {
         $query = "UPDATE Reservations
                   SET city_id = :city_id, address = :address, for_date = :for_date, from_hour = :from_hour, to_hour = :to_hour, sidenote = :sidenote, is_accepted = :is_accepted
                   WHERE id = :reservation_id";
         $statement = $this->pdo->prepare($query);
         $statement->execute($input);
-        $id = $this->pdo->lastInsertId();
-        return $id;
+    }
+
+    public function check_report($input) {
+        $query = "UPDATE Reports
+                  SET time_accepted = CURRENT_TIMESTAMP, 
+                  goal_of_session = :goal_of_session, 
+                  volunteer_activities = :volunteer_activities, 
+                  sidenote = :sidenote, 
+                  attendance_comment = :attendance_comment, 
+                  grade = :grade, 
+                  administration_comment = :administration_comment, 
+                  is_accepted = :is_accepted
+                  WHERE reservation_id = :reservation_id";
+        $statement = $this->pdo->prepare($query);
+        $statement->execute($input);
     }
 
     public function finalize_reservation($id) {
@@ -162,7 +189,7 @@ class PersistenceManager {
                   INNER JOIN Cities AS c ON res.city_id = c.id
                   INNER JOIN Mentors AS mentor ON res.id = mentor.reservation_id
                   INNER JOIN UniversityStudents as stu ON mentor.student_id = stu.id
-                  WHERE res.is_accepted = 1";
+                  WHERE res.is_accepted = 1 AND (rep.is_accepted IS NULL OR rep.is_accepted = 0)";
         return $this->pdo->query($query)->fetchAll();
     }
     public function get_completed_reports() {
@@ -178,14 +205,22 @@ class PersistenceManager {
         return $this->pdo->query($query)->fetchAll();
     }
 
-    public function get_report_data($id) {
-        $query = "SELECT res.id AS reservation_id, stu.name AS name, stu.surname AS surname, c.city AS city, c.id AS city_id, res.address AS address 
-                  FROM Reservations AS res 
-                  INNER JOIN Mentors AS mentor ON mentor.reservation_id = res.id 
-                  INNER JOIN UniversityStudents AS stu ON mentor.student_id = stu.id 
-                  INNER JOIN Cities AS c ON res.city_id = c.id
-                  WHERE res.id = ?";
+    public function get_active_report_data() {
+        $query = "SELECT * FROM Reports AS rep
+                  INNER JOIN Reservations AS res ON rep.reservation_id = res.id
+                  INNER JOIN Mentors AS men ON res.id = men.reservation_id
+                  INNER JOIN UniversityStudents AS stu ON men.student_id = stu.id
+                  WHERE rep.is_accepted = 0";
+        return $this->pdo->query($query)->fetchAll();
+    }
 
+    public function get_completed_report_data() {
+        $query = "SELECT * FROM Reports AS rep
+                  INNER JOIN Reservations AS res ON rep.reservation_id = res.id
+                  INNER JOIN Mentors AS men ON res.id = men.reservation_id
+                  INNER JOIN UniversityStudents AS stu ON men.student_id = stu.id 
+                  WHERE rep.is_accepted = 1";
+        return $this->pdo->query($query)->fetchAll();
     }
 
 }

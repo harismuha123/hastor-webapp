@@ -88,9 +88,14 @@ Flight::route('GET /kompletirani', function (){
     Flight::json(array( "reports" => $reports));
 });
 
-Flight::route('GET /izvjestaj/@id', function ($id){
-    $report = Flight::pm()->get_report_data($id);
-    Flight::json($report);
+Flight::route('GET /aktivni_izvjestaj', function (){
+    $reports = Flight::pm()->get_active_report_data();
+    Flight::json($reports);
+});
+
+Flight::route('GET /kompletirani_izvjestaj', function (){
+    $reports = Flight::pm()->get_completed_report_data();
+    Flight::json($reports);
 });
 
 Flight::route('POST /kreiraj_najavu', function () {
@@ -132,6 +137,11 @@ Flight::route('DELETE /obrisi_najavu/@id', function($id){
     Flight::pm()->delete_reservation($id);
 });
 
+Flight::route('DELETE /obrisi_izvjestaj/@id', function($id){
+    Flight::pm()->delete_report($id);
+    Flight::pm()->update_reservation($id);
+});
+
 Flight::route('POST /pregledaj_najavu/', function(){
     $student = Flight::request()->data->volunteer;
     $city = Flight::request()->data->city;
@@ -155,6 +165,31 @@ Flight::route('POST /pregledaj_najavu/', function(){
     );
     Flight::pm()->check_reservation($input);
 });
+
+Flight::route('POST /pregledaj_izvjestaj/', function(){
+    $student = Flight::request()->data->volunteer;
+    $acceptedString = Flight::request()->data->is_accepted;
+    $is_accepted = 0;
+    if ($acceptedString === "Da") {
+        $is_accepted = 1;
+    }
+    $request = Flight::request();
+    $studentArray = explode(" ", $student);
+    $input = array(
+        "goal_of_session" => $request->data->goal_of_session,
+        "volunteer_activities" => $request->data->volunteer_activities,
+        "sidenote" => $request->data->sidenote,
+        "attendance_comment" => $request->data->goal_of_session,
+        "grade" => $request->data->grade,
+        "administration_comment" => $request->data->administration_comment,
+        "reservation_id" => $studentArray[0],
+        "is_accepted" => $is_accepted
+    );
+    Flight::pm()->check_report($input);
+});
+
+
+
 
 Flight::route('DELETE /university_students/@id', function($id){
     Flight::pm()->delete_university_student($id);

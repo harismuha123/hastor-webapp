@@ -94,12 +94,12 @@
                 { data: "to_hour" },
                 { data: "reservation_id",
                     render : function(data, type, row) {
-                        return '<button id="'+ data +'" data-toggle="modal" class="check_button btn btn-primary" data-target="#messageModal">Pregledaj</button>'
+                        return '<button id="'+ data +'" data-toggle="modal" class="check_report btn btn-primary" data-target="#reportCheckModal">Pregledaj</button>'
                     }
                 },
                 { data: "reservation_id",
                     render : function(data, type, row) {
-                        return '<button id="'+ data +'" class="delete_button btn btn-danger">Obriši</button>'
+                        return '<button id="'+ data +'" class="delete_report btn btn-danger">Obriši</button>'
                     }
                 }
             ]
@@ -116,6 +116,39 @@
             });
         });
     }
+
+    $('.table tbody').on('click', '.delete_report', function () {
+        var id = $(this).attr('id');
+        if (confirm("Jeste li sigurni?")){
+            $.ajax({url: "rest/obrisi_izvjestaj/"+id, method: "DELETE" }).done(function( msg ) {
+                $(['aktivni', 'kompletirani']).each(function (index, name) {
+                    $('#'+name+'-table').DataTable().ajax.reload();
+                });
+                alert("Izvještaj uspješno obrisan!");
+            }).fail(function( jqXHR, textStatus ) {
+                alert( "Request failed: " + textStatus );
+            });
+        }
+    });
+
+    $('.table tbody').on('click', '.check_report', function () {
+        var id = $(this).attr('id');
+        $(['aktivni', 'kompletirani']).each(function (index, name) {
+            $.get("rest/"+name+"_izvjestaj", function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    if(id === data[i].reservation_id) {
+                        $("#vName").val(data[i].reservation_id + " - " + data[i].name + " " + data[i].surname);
+                        $("#sessGoal").val(data[i].goal_of_session);
+                        $("#volActivities").val(data[i].volunteer_activities);
+                        $("#sideNote").val(data[i].sidenote);
+                        $("#attrComment").val(data[i].attendance_comment);
+                        $("#administratorComment").val(data[i].administration_comment);
+                        $("#sidenoteText").val(data[i].sidenote);
+                    }
+                }
+            });
+        })
+    });
 
 
 </script>
