@@ -474,6 +474,13 @@
 	<script type="text/javascript">
 
         if(Utils.get_from_localstorage('user')) {
+            $.ajaxPrefilter(function( options ) {
+                if ( !options.beforeSend) {
+                    options.beforeSend = function (xhr) {
+                        xhr.setRequestHeader('hastor-jwt', JSON.parse(localStorage.getItem('user')).token);
+                    }
+                }
+            });
             $('#main-content').show();
             var app = $.spapp({
                 defaultView  : "#homepage",
@@ -521,12 +528,6 @@
             app.run();
 
             var isClicked = false;
-
-            /*
-            headers: {
-                        'hastor-jwt': localStorage.getItem('user')
-                    },
-            */
 
             $.get("rest/front_page", function (data) {
                 var html = "";

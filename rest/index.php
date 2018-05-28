@@ -16,20 +16,19 @@ use \Firebase\JWT\JWT;
 Flight::register('frontpage', 'FrontPageAPI');
 Flight::register('pm', 'PersistenceManager', [Config::DB]);
 
-//Flight::before('start', function(&$params, &$output) {
-//    if (!(Flight::request()->url == '/login' && Flight::request()->method == 'POST')){
-//        $jwt = getallheaders()['hastor-jwt'];
-//        print_r($jwt);
-//        try {
-//            $decoded = (array)JWT::decode($jwt, Config::JWT_SECRET, ['HS256']);
-//            $decoded['user'] = (array)$decoded['user'];
-//            Flight::set('user', $decoded['user']);
-//        } catch (Exception $e) {
-//            Flight::halt(401, Flight::json(['message' => 'JWT token invalid']));
-//            die;
-//        }
-//    }
-//});
+Flight::before('start', function(&$params, &$output) {
+    if (!(Flight::request()->url == '/login' && Flight::request()->method == 'POST')){
+        $jwt = getallheaders()['hastor-jwt'];
+        try {
+            $decoded = (array)JWT::decode($jwt, Config::JWT_SECRET, ['HS256']);
+            $decoded['user'] = (array)$decoded['user'];
+            Flight::set('user', $decoded['user']);
+        } catch (Exception $e) {
+            Flight::halt(401, Flight::json(['message' => 'JWT token invalid']));
+            die;
+        }
+    }
+});
 
 Flight::route('POST /login', function(){
     $request = Flight::request();
