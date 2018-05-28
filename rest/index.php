@@ -11,8 +11,45 @@ require_once 'FrontPageAPI.php';
 require_once 'PersistenceManager.class.php';
 require_once 'Config.class.php';
 
+use \Firebase\JWT\JWT;
+
 Flight::register('frontpage', 'FrontPageAPI');
 Flight::register('pm', 'PersistenceManager', [Config::DB]);
+
+//Flight::before('start', function(&$params, &$output) {
+//    if (!(Flight::request()->url == '/login' && Flight::request()->method == 'POST')){
+//        $jwt = getallheaders()['hastor-jwt'];
+//        print_r($jwt);
+//        try {
+//            $decoded = (array)JWT::decode($jwt, Config::JWT_SECRET, ['HS256']);
+//            $decoded['user'] = (array)$decoded['user'];
+//            Flight::set('user', $decoded['user']);
+//        } catch (Exception $e) {
+//            Flight::halt(401, Flight::json(['message' => 'JWT token invalid']));
+//            die;
+//        }
+//    }
+//});
+
+Flight::route('POST /login', function(){
+    $request = Flight::request();
+    $db_user = Flight::pm()->get_user_by_email($request->data->email);
+    print_r($db_user['password']);
+    if ($db_user){
+        if ($db_user['password'] == $request->data->password){
+            unset($db_user['password']);
+            $token = ["user" => $db_user, "iat" => time(), "exp" => time() + 3600];
+            $jwt = JWT::encode($token, Config::JWT_SECRET);
+            $db_user['token'] = $jwt;
+            Flight::json($db_user);
+        }else{
+            Flight::halt(400, Flight::json(['message' => 'Invalid password for email address '. $request->data->email]));
+        }
+    }else{
+        Flight::halt(400, Flight::json(['message' => 'Invalid email address']));
+    }
+});
+
 
 Flight::route('GET /front_page', function() {
     Flight::json(Flight::frontpage()->get_data());

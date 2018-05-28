@@ -44,15 +44,10 @@
     <!-- DataTable JS -->
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.16/r-2.2.1/rr-1.2.3/datatables.min.js"></script>
 
-
-    <script>
-        // window.location.replace("./pages/login.html");
-    </script>
-
 </head>
 <body>
 
-<div class="wrapper">
+<div id="main-content" class="wrapper" style="display: none;">
     <div class="sidebar" data-color="blue">
 
     <!--
@@ -133,9 +128,7 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="#">
-                                <p>Odjavi se</p>
-                            </a>
+                            <button onclick="logout()" class="log_off btn btn-info" data-toggle="modal" data-target="#login-modal">Odjavi se</button>
                         </li>
 						<li class="separator hidden-lg"></li>
                     </ul>
@@ -434,8 +427,35 @@
             <!-- Footer -->
             <div class="modal-footer"></div>
         </div>
-
     </div>
+
+    <div id="login-modal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-sm">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <form id="login-form">
+                    <div class="modal-header text-center">
+                        <img class="rounded" src="assets/img/fondacija/siva_kapica.png" alt="fondacija-logo">
+                    </div>
+                    <div class="modal-body">
+                        <form class="form" role="form">
+                            <div class="form-group">
+                                <label for="emailText">E-mail</label>
+                                <input type="email" class="form-control form-control-lg rounded-0" name="email" id="emailText" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Šifra</label>
+                                <input type="password" class="form-control form-control-lg rounded-0" id="password" name="password" required>
+                            </div>
+                        </form>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-default center-block" id="btnLogin">Prijavi se</button>
+                    </div>
+            </div>
+
+        </div>
+    </div>
+
 </body>
     <!--  Notifications Plugin    -->
     <script src="assets/js/bootstrap-notify.js"></script>
@@ -448,92 +468,134 @@
     <script src="assets/js/custom.js"></script>
 
     <!--  Custom JS  -->
-    <script src="assets/js/dashboard.js"></script>
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/toastr.min.js"></script>
 
 	<script type="text/javascript">
-        var app = $.spapp({
-            defaultView  : "#homepage",
-            templateDir  : "./pages/",
-            pageNotFound : "error_404"
-        });
 
-        $(['user', 'table', 'homepage', 'reservations', 'reports']).each(function(index, name){
-            app.route({
-                view : name,
-                load : name+".html",
-                onReady: function(e) {
-                    if ($('html').hasClass('nav-open')){
-                        $('html').removeClass('nav-open');
-                    }
-                    $('#'+name+"-link").closest('ul').find('li').removeClass('active');
-                    $('#'+name+"-link").closest('li').addClass('active');
+        if(Utils.get_from_localstorage('user')) {
+            $('#main-content').show();
+            var app = $.spapp({
+                defaultView  : "#homepage",
+                templateDir  : "./pages/",
+                pageNotFound : "error_404"
+            });
 
-                    var content = "";
-
-                    switch(name) {
-                        case "homepage":
-                            content = "Početna";
-                            break;
-                        case "user":
-                            content = "Moj profil";
-                            break;
-                        case "table":
-                            content = "Stipendisti";
-                            break;
-                        case "reservations":
-                            content = "Najave";
-                            break;
-                        case "reports":
-                            content = "Izvještaji";
-                            break;
-                        default:
-                            content = "Početna";
-                    }
-
-                    $.get("rest/front_page", function (data) {
-                        var html = "";
-                        for(var i = 0; i < data.length; i++) {
-                            if(i !== 0 && i % 3 === 0) {
-                                html += "</div>\n" +
-                                    "    <div class=\"clearfix visible-md-block\"></div>" +
-                                    "    <div class='row'></div>";
-                            }
-                            html += "<div class=\"col-md-4\">\n" +
-                                "        <div class=\"card card-price\">\n" +
-                                "            <div class=\"image\">\n" +
-                                "                <img src='"+ data[i].image + "' alt=\"...\"/>\n" +
-                                "            </div>\n" +
-                                "            <div class=\"content\">\n" +
-                                "                 <h5 class=\"title\"><a href='"+ data[i].about +"' target='_blank'>" + data[i].title +"</h5>\n" +
-                                "            </div>\n" +
-                                "        </div>\n" +
-                                "    </div>";
+            $(['user', 'table', 'homepage', 'reservations', 'reports']).each(function(index, name){
+                app.route({
+                    view : name,
+                    load : name+".html",
+                    onReady: function(e) {
+                        if ($('html').hasClass('nav-open')){
+                            $('html').removeClass('nav-open');
                         }
-                        $(".homepage").html(html);
-                    });
+                        $('#'+name+"-link").closest('ul').find('li').removeClass('active');
+                        $('#'+name+"-link").closest('li').addClass('active');
 
-                    $('.dynamic-namebar').html("<a id=\"header-name\" class=\"navbar-brand\" href=\"#" + name + "\">Fondacija Hastor  |  " + content + "</a>")
+                        var content = "";
+
+                        switch(name) {
+                            case "homepage":
+                                content = "Početna";
+                                break;
+                            case "user":
+                                content = "Moj profil";
+                                break;
+                            case "table":
+                                content = "Stipendisti";
+                                break;
+                            case "reservations":
+                                content = "Najave";
+                                break;
+                            case "reports":
+                                content = "Izvještaji";
+                                break;
+                            default:
+                                content = "Početna";
+                        }
+
+                        $('.dynamic-namebar').html("<a id=\"header-name\" class=\"navbar-brand\" href=\"#" + name + "\">Fondacija Hastor  |  " + content + "</a>")
+                    }
+                });
+            });
+            app.run();
+
+            var isClicked = false;
+
+            /*
+            headers: {
+                        'hastor-jwt': localStorage.getItem('user')
+                    },
+            */
+
+            $.get("rest/front_page", function (data) {
+                var html = "";
+                for(var i = 0; i < data.length; i++) {
+                    if(i !== 0 && i % 3 === 0) {
+                        html += "</div>\n" +
+                            "    <div class=\"clearfix visible-md-block\"></div>" +
+                            "    <div class='row'></div>";
+                    }
+                    html += "<div class=\"col-md-4\">\n" +
+                        "        <div class=\"card card-price\">\n" +
+                        "            <div class=\"image\">\n" +
+                        "                <img src='"+ data[i].image + "' alt=\"...\"/>\n" +
+                        "            </div>\n" +
+                        "            <div class=\"content\">\n" +
+                        "                 <h5 class=\"title\"><a href='"+ data[i].about +"' target='_blank'>" + data[i].title +"</h5>\n" +
+                        "            </div>\n" +
+                        "        </div>\n" +
+                        "    </div>";
+                }
+                $(".homepage").html(html);
+            });
+
+            $("#admin-functions").click(function () {
+                if (isClicked) {
+                    $(this).attr("class", "dropdown");
+                    $(".aria").attr("aria-expanded", "false");
+                    $("#edit-profile").attr("class", "hidden");
+                    isClicked = false;
+                } else {
+                    $(this).attr("class", "dropdown open");
+                    $("#aria").attr("aria-expanded", "true");
+                    $("#edit-profile").attr("class", "");
+                    isClicked = true;
                 }
             });
-        });
-        app.run();
-
-        var isClicked = false;
 
 
-        $("#admin-functions").click(function () {
-            if (isClicked) {
-                $(this).attr("class", "dropdown");
-                $(".aria").attr("aria-expanded", "false");
-                $("#edit-profile").attr("class", "hidden");
-                isClicked = false;
-            } else {
-                $(this).attr("class", "dropdown open");
-                $("#aria").attr("aria-expanded", "true");
-                $("#edit-profile").attr("class", "");
-                isClicked = true;
-            }
-        });
+            $.notify({
+                icon: 'pe-7s-id',
+                message: "Dobrodošli u <b>Administracioni Sistem Fondacije Hastor</b>."
+
+            },{
+                type: 'info',
+                timer: 3000
+            });
+        } else {
+            $('#login-form').validate({
+                submitHandler: function(form) {
+                    $('#overlay').show();
+                    $.post( "rest/login", $('#login-form').serialize(),  function( data ) {
+                        Utils.set_to_localstorage('user', data);
+                        window.location=".";
+                    }).fail(function(error) {
+                        toastr.error(error.responseJSON.message);
+                    }).always(function() {
+                        $('#overlay').hide();
+                    });
+                    return false;
+                }
+            });
+            $('#login-modal').modal();
+            $('#main-content').hide();
+        }
+
+        function logout(){
+            Utils.clear_cache();
+            window.location=".";
+        }
 
 	</script>
     <script>
@@ -657,4 +719,6 @@
             }
         });
     </script>
+
+    <div id="overlay"></div>
 </html>

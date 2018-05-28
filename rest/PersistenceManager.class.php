@@ -47,8 +47,11 @@ class PersistenceManager {
         return $this->pdo->query($query)->fetchAll();
     }
 
-    public function get_user_by_id($id){
-
+    public function get_user_by_email($email){
+        $query = "SELECT * FROM Users WHERE email = ?";
+        $statement = $this->pdo->prepare($query);
+        $statement->execute([$email]);
+        return $statement->fetch();
     }
 
     public function update_user($id, $user){

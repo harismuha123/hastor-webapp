@@ -120,7 +120,13 @@
     $('.table tbody').on('click', '.delete_report', function () {
         var id = $(this).attr('id');
         if (confirm("Jeste li sigurni?")){
-            $.ajax({url: "rest/obrisi_izvjestaj/"+id, method: "DELETE" }).done(function( msg ) {
+            $.ajax({
+                url: "rest/obrisi_izvjestaj/"+id,
+                method: "DELETE",
+                headers: {
+                    'hastor-jwt': localStorage.getItem('user')
+                }
+            }).done(function( msg ) {
                 $(['aktivni', 'kompletirani']).each(function (index, name) {
                     $('#'+name+'-table').DataTable().ajax.reload();
                 });
