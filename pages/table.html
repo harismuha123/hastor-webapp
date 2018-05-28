@@ -95,31 +95,35 @@
     </div>
 </div>
 <script>
-
-   $(['osnovci', 'srednjoskolci', 'studenti']).each(function (index, name) {
-       $('#'+name+'-table').DataTable({
-           responsive: true,
-           autoWidth: false,
-           ajax:  {
-               url: 'rest/'+name,
-               dataSrc: 'students',
-               dom: 'rtip', // the "r" is for the "processing" message
-               processing: true, // you have to set this to true as well
-               serverSide: true
-           },
-           columns: [
-               { data: "id" },
-               { data: "name" },
-               { data: "surname" },
-               { data: "city" },
-               { data: "address" },
-               { data: "email" },
-               { data: "tel1" },
-               { data: "facility_name" },
-               { data: "year_of_study" },
-               { data: "gpa" }
-           ]
-       });
-   });
+    $(document).ready(function () {
+        $('a[data-toggle="tab"]').on( 'shown.bs.tab', function (e) {
+            $.fn.dataTable.tables( {visible: true, api: true} ).columns.adjust();
+        } );
+        $(['osnovci', 'srednjoskolci', 'studenti']).each(function (index, name) {
+            $('#'+name+'-table').DataTable({
+                responsive: true,
+                autoWidth: false,
+                ajax:  {
+                    url: 'rest/'+name,
+                    dataSrc: 'students',
+                    dom: 'rtip', // the "r" is for the "processing" message
+                    processing: true, // you have to set this to true as well
+                    serverSide: true
+                },
+                columns: [
+                    { data: "id" },
+                    { data: "name" },
+                    { data: "surname" },
+                    { data: "city" },
+                    { data: "address" },
+                    { data: "email" },
+                    { data: "tel1" },
+                    { data: "facility_name" },
+                    { data: "year_of_study" },
+                    { data: "gpa" }
+                ]
+            });
+        });
+    })
 
 </script>

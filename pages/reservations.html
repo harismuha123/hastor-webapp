@@ -71,23 +71,25 @@
                     </div>
                     <div role="tabpanel" class="tab-pane fade in" id="prihvacene">
                         <ul class="list-group media-list media-list-stream">
-                            <div class="content table-responsive table-full-width">
-                                <table id="prihvacene-table" class="table table-hover table-striped">
-                                    <thead>
-                                    <th>Ime</th>
-                                    <th>Prezime</th>
-                                    <th>Grad</th>
-                                    <th>Adresa</th>
-                                    <th>Datum</th>
-                                    <th>Od</th>
-                                    <th>Do</th>
-                                    <th></th>
-                                    <th></th>
-                                    </thead>
-                                    <tbody id="prihvacene-body">
+                            <div class="row">
+                                <div class="content table-responsive table-full-width">
+                                    <table id="prihvacene-table" class="table table-hover table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                        <th>Ime</th>
+                                        <th>Prezime</th>
+                                        <th>Grad</th>
+                                        <th>Adresa</th>
+                                        <th>Datum</th>
+                                        <th>Od</th>
+                                        <th>Do</th>
+                                        <th></th>
+                                        <th></th>
+                                        </thead>
+                                        <tbody id="prihvacene-body">
 
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </ul>
                     </div>
@@ -98,6 +100,10 @@
 </div>
 <script>
     $(document).ready(function () {
+        $('a[data-toggle="tab"]').on( 'shown.bs.tab', function (e) {
+            $.fn.dataTable.tables( {visible: true, api: true} ).columns.adjust();
+        } );
+
         $(['pristigle', 'vracene', 'prihvacene']).each(function (index, name) {
             $('#'+name+'-table').DataTable({
                 responsive: true,

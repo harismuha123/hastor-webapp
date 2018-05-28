@@ -226,6 +226,22 @@ class PersistenceManager {
         return $this->pdo->query($query)->fetchAll();
     }
 
+    public function get_all_middle_schools() {
+        $query = "SELECT id, name FROM Schools
+                  WHERE is_highschool = 0";
+        return $this->pdo->query($query)->fetchAll();
+    }
+
+    public function get_all_high_schools() {
+        $query = "SELECT id, name FROM Schools
+                  WHERE is_highschool = 1";
+        return $this->pdo->query($query)->fetchAll();
+    }
+
+    public function get_all_universities() {
+        $query = "SELECT id, name FROM Universities";
+        return $this->pdo->query($query)->fetchAll();
+    }
 }
 
 ?>

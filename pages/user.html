@@ -21,7 +21,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Korisničko ime</label>
-                                <input id="username" type="text" name="username" class="form-control" readonly>
+                                <input id="username" type="text" name="username" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -33,98 +33,78 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label>Ime</label>
-                                <input type="text" name="firstname" class="form-control" placeholder="First name">
+                                <input type="text" name="first_name" class="form-control" placeholder="First name">
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label>Prezime</label>
-                                <input type="text" name="lastname" class="form-control">
+                                <input type="text" name="last_name" class="form-control">
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label>Ime oca</label>
-                                <input type="text" name="fathername" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>JMBG</label>
-                                <input type="text" name="ssn" class="form-control">
+                                <input type="text" name="father_name" class="form-control">
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label>Datum rođenja</label>
-                                <input type="date" name="dateofbirth" class="form-control">
+                                <input type="date" name="date_of_birth" class="form-control">
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label>Datum početka stipendiranja</label>
-                                <input type="date" name="date" class="form-control">
+                                <input type="date" name="date_joined" class="form-control">
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Spol</label>
-                                <select class="form-control" id="gender">
-                                    <option>Muško</option>
-                                    <option>Žensko</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label>Adresa</label>
                                 <input type="text" name="address" class="form-control">
                             </div>
                         </div>
-
                     </div>
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label>Grad</label>
-                                <input type="text" name="city" class="form-control" >
+                                <select class="form-control" id="cities" name="city">
+
+                                </select>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label>Broj telefona</label>
-                                <input type="text" name="telephonenum" class="form-control" >
+                                <input type="text" name="tel1" class="form-control" >
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="form-group">
-                                <label>Škola</label>
-                                <input type="text" name="date" class="form-control">
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Poštanski broj</label>
-                                <input type="number" name="postalcode" class="form-control">
+                                <label>Škola/Univerzitet</label>
+                                <select class="form-control" id="school" name="school">
+                                    <optgroup id="middle-school" label="Osnovne škole">
+
+                                    </optgroup>
+                                    <optgroup id="high-school" label="Srednje škole">
+
+                                    </optgroup>
+                                    <optgroup id="university" label="Fakulteti">
+
+                                    </optgroup>
+                                </select>
                             </div>
                         </div>
                     </div>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>Dodatne informacije</label>
-                                <textarea rows="5" name="additionalinfo" class="form-control"></textarea>
-                            </div>
-                        </div>
-                    </div>
-
                     <button type="submit" class="btn btn-info btn-fill pull-right">Update Profile</button>
                     <div class="clearfix"></div>
                 </form>

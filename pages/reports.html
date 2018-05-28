@@ -73,37 +73,44 @@
 </div>
 <script>
 
-    $(['aktivni', 'kompletirani']).each(function (index, name) {
-        $('#'+name+'-table').DataTable({
-            responsive: true,
-            autoWidth: false,
-            ajax:  {
-                url: 'rest/'+name,
-                dataSrc: 'reports',
-                dom: 'rtip', // the "r" is for the "processing" message
-                processing: true, // you have to set this to true as well
-                serverSide: true
-            },
-            columns: [
-                { data: "name" },
-                { data: "surname" },
-                { data: "city" },
-                { data: "address" },
-                { data: "for_date" },
-                { data: "from_hour" },
-                { data: "to_hour" },
-                { data: "reservation_id",
-                    render : function(data, type, row) {
-                        return '<button id="'+ data +'" data-toggle="modal" class="check_report btn btn-primary" data-target="#reportCheckModal">Pregledaj</button>'
-                    }
+    $(document).ready(function () {
+        $('a[data-toggle="tab"]').on( 'shown.bs.tab', function (e) {
+            $.fn.dataTable.tables( {visible: true, api: true} ).columns.adjust();
+        } );
+
+        $(['aktivni', 'kompletirani']).each(function (index, name) {
+            $('#'+name+'-table').DataTable({
+                responsive: true,
+                autoWidth: false,
+                ajax:  {
+                    url: 'rest/'+name,
+                    dataSrc: 'reports',
+                    dom: 'rtip', // the "r" is for the "processing" message
+                    processing: true, // you have to set this to true as well
+                    serverSide: true
                 },
-                { data: "reservation_id",
-                    render : function(data, type, row) {
-                        return '<button id="'+ data +'" class="delete_report btn btn-danger">Obriši</button>'
+                columns: [
+                    { data: "name" },
+                    { data: "surname" },
+                    { data: "city" },
+                    { data: "address" },
+                    { data: "for_date" },
+                    { data: "from_hour" },
+                    { data: "to_hour" },
+                    { data: "reservation_id",
+                        render : function(data, type, row) {
+                            return '<button id="'+ data +'" data-toggle="modal" class="check_report btn btn-primary" data-target="#reportCheckModal">Pregledaj</button>'
+                        }
+                    },
+                    { data: "reservation_id",
+                        render : function(data, type, row) {
+                            return '<button id="'+ data +'" class="delete_report btn btn-danger">Obriši</button>'
+                        }
                     }
-                }
-            ]
+                ]
+            });
         });
+
     });
 
     function fillList() {

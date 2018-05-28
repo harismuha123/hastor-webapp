@@ -9,12 +9,12 @@ $(document).ready(function () {
 
     $("#profile-form").validate({
         rules: {
-            firstname: {
+            first_name: {
                 required: true,
                 minlength: 2,
                 maxlength: 40
             },
-            lastname: {
+            last_name: {
                 required: true,
                 minlength: 2,
                 maxlength: 40
@@ -26,6 +26,9 @@ $(document).ready(function () {
                 required: true,
                 minlength: 5
             }
+        },
+        submitHandler(form) {
+
         }
     });
 

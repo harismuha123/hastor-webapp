@@ -2,6 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="df6d4af1-114b-457a-8368-f735cfcea373" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/create_profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/create_profile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/reports.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/reports.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/reservations.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/reservations.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/table.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/table.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/user.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/user.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rest/PersistenceManager.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/rest/PersistenceManager.class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rest/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/rest/index.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -43,22 +50,17 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
-              <caret line="479" column="69" lean-forward="true" selection-start-line="479" selection-start-column="69" selection-end-line="479" selection-end-column="69" />
+            <state relative-caret-position="254">
+              <caret line="311" column="28" lean-forward="true" selection-start-line="311" selection-start-column="28" selection-end-line="313" selection-end-column="37" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="utils.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/js/utils.js">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file leaf-file-name="PersistenceManager.class.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/rest/PersistenceManager.class.php">
+      <file leaf-file-name="create_profile.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assets/js/create_profile.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="901">
-              <caret line="53" column="15" selection-start-line="53" selection-start-column="15" selection-end-line="53" selection-end-column="15" />
+            <state relative-caret-position="387">
+              <caret line="30" selection-start-line="30" selection-end-line="30" />
             </state>
           </provider>
         </entry>
@@ -72,13 +74,50 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="PersistenceManager.class.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/rest/PersistenceManager.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="166">
+              <caret line="230" column="26" lean-forward="true" selection-start-line="230" selection-start-column="26" selection-end-line="230" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="reports.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/reports.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1377">
-              <caret line="81" column="35" selection-start-line="81" selection-start-column="35" selection-end-line="81" selection-end-column="35" />
+            <state relative-caret-position="1203">
+              <caret line="111" column="11" selection-start-line="111" selection-start-column="11" selection-end-line="111" selection-end-column="11" />
               <folding>
                 <element signature="n#style#0;n#a#0;n#li#1;n#ul#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="e#4146#4971#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="table.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pages/table.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="251">
+              <caret line="98" column="8" selection-start-line="98" selection-start-column="8" selection-end-line="100" selection-end-column="12" />
+              <folding>
+                <element signature="e#5351#5716#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="reservations.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pages/reservations.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1271">
+              <caret line="104" column="12" selection-start-line="104" selection-start-column="12" selection-end-line="104" selection-end-column="12" />
+              <folding>
+                <element signature="n#style#0;n#a#0;n#li#1;n#ul#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#0;n#li#2;n#ul#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#li#3;n#ul#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="e#5299#6190#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -87,11 +126,20 @@
       <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/rest/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="19" column="86" selection-start-line="19" selection-start-column="86" selection-end-line="19" selection-end-column="86" />
+            <state relative-caret-position="153">
+              <caret line="18" selection-start-line="18" selection-end-line="30" selection-end-column="3" />
               <folding>
                 <element signature="e#6#84#0#PHP" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="user.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pages/user.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="271">
+              <caret line="100" column="60" selection-start-line="100" selection-start-column="60" selection-end-line="100" selection-end-column="60" />
             </state>
           </provider>
         </entry>
@@ -117,6 +165,8 @@
       <find>UPDATE</find>
       <find>DELETE</find>
       <find>homepage</find>
+      <find>status</find>
+      <find>men</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -147,8 +197,6 @@
         <option value="$PROJECT_DIR$/pages/homepage.html" />
         <option value="$PROJECT_DIR$/assets/js/homepage.js" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/3fde00c3-b359-4dd2-99d7-0298c545467e/console.sql" />
-        <option value="$PROJECT_DIR$/assets/js/create_profile.js" />
-        <option value="$PROJECT_DIR$/pages/user.html" />
         <option value="$PROJECT_DIR$/rest/FrontPageAPI.php" />
         <option value="$PROJECT_DIR$/assets/css/demo.css" />
         <option value="$PROJECT_DIR$/pages/dashboard_admin.html" />
@@ -157,16 +205,18 @@
         <option value="$PROJECT_DIR$/rest/PersistenceManager.php" />
         <option value="$PROJECT_DIR$/rest/beze.txt" />
         <option value="$PROJECT_DIR$/pages/middle_school.html" />
-        <option value="$PROJECT_DIR$/pages/table.html" />
         <option value="$PROJECT_DIR$/pages/template.html" />
         <option value="$PROJECT_DIR$/rest/AdministratorUser.class.php" />
         <option value="$PROJECT_DIR$/pages/login.html" />
         <option value="$PROJECT_DIR$/assets/js/dashboard.js" />
-        <option value="$PROJECT_DIR$/rest/PersistenceManager.class.php" />
-        <option value="$PROJECT_DIR$/pages/reservations.html" />
-        <option value="$PROJECT_DIR$/pages/reports.html" />
         <option value="$PROJECT_DIR$/rest/Config.class.php" />
         <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/pages/table.html" />
+        <option value="$PROJECT_DIR$/pages/reservations.html" />
+        <option value="$PROJECT_DIR$/pages/reports.html" />
+        <option value="$PROJECT_DIR$/assets/js/create_profile.js" />
+        <option value="$PROJECT_DIR$/pages/user.html" />
+        <option value="$PROJECT_DIR$/rest/PersistenceManager.class.php" />
         <option value="$PROJECT_DIR$/rest/index.php" />
       </list>
     </option>
@@ -188,7 +238,7 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="width" value="1366" />
+    <option name="width" value="681" />
     <option name="height" value="732" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -226,19 +276,6 @@
               <item name="hastor-webapp" type="b2602c69:ProjectViewProjectNode" />
               <item name="hastor-webapp" type="462c0819:PsiDirectoryNode" />
               <item name="assets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="hastor-webapp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hastor-webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="img" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="hastor-webapp" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hastor-webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="img" type="462c0819:PsiDirectoryNode" />
-              <item name="fondacija" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="hastor-webapp" type="b2602c69:ProjectViewProjectNode" />
@@ -350,7 +387,7 @@
       <workItem from="1526804737074" duration="22000" />
       <workItem from="1526907584464" duration="624000" />
       <workItem from="1526981955465" duration="166796000" />
-      <workItem from="1527498065919" duration="4089000" />
+      <workItem from="1527498065919" duration="8857000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1521469453030</created>
@@ -552,13 +589,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="320484000" />
+    <option name="totallyTimeSpent" value="325252000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1366" height="732" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4994401" visible="true" weight="0.16363636" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4994401" weight="0.20530303" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.3281075" />
@@ -567,7 +604,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.3296" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32922733" />
       <window_info id="Structure" order="1" sideWeight="0.5005599" side_tool="true" weight="0.17182498" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.3252174" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.44" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -744,28 +781,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/user.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-18">
-          <caret line="109" column="30" lean-forward="true" selection-start-line="109" selection-start-column="30" selection-end-line="109" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assets/js/create_profile.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="91">
-          <caret line="9" column="33" lean-forward="true" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pages/template.html" />
-    <entry file="file://$PROJECT_DIR$/pages/table.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="436">
-          <caret line="97" selection-start-line="97" selection-end-line="97" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/rest/AdministratorUser.class.php" />
     <entry file="file://$PROJECT_DIR$/pages/login.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -813,37 +829,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/reservations.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-655">
-          <caret line="106" column="44" selection-start-line="106" selection-start-column="44" selection-end-line="106" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pages/reports.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1377">
-          <caret line="81" column="35" selection-start-line="81" selection-start-column="35" selection-end-line="81" selection-end-column="35" />
-          <folding>
-            <element signature="n#style#0;n#a#0;n#li#1;n#ul#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/js/utils.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/apache/apache.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="479" column="69" lean-forward="true" selection-start-line="479" selection-start-column="69" selection-end-line="479" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rest/PersistenceManager.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="901">
-          <caret line="53" column="15" selection-start-line="53" selection-start-column="15" selection-end-line="53" selection-end-column="15" />
+        <state relative-caret-position="378">
+          <caret line="133" column="9" selection-start-line="133" selection-start-column="9" selection-end-line="133" selection-end-column="9" />
         </state>
       </provider>
     </entry>
@@ -854,17 +846,72 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/apache/apache.php">
+    <entry file="file://$PROJECT_DIR$/pages/reports.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="133" column="9" selection-start-line="133" selection-start-column="9" selection-end-line="133" selection-end-column="9" />
+        <state relative-caret-position="1203">
+          <caret line="111" column="11" selection-start-line="111" selection-start-column="11" selection-end-line="111" selection-end-column="11" />
+          <folding>
+            <element signature="n#style#0;n#a#0;n#li#1;n#ul#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="e#4146#4971#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/table.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="251">
+          <caret line="98" column="8" selection-start-line="98" selection-start-column="8" selection-end-line="100" selection-end-column="12" />
+          <folding>
+            <element signature="e#5351#5716#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/reservations.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1271">
+          <caret line="104" column="12" selection-start-line="104" selection-start-column="12" selection-end-line="104" selection-end-column="12" />
+          <folding>
+            <element signature="n#style#0;n#a#0;n#li#1;n#ul#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#li#2;n#ul#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#li#3;n#ul#0;n#div#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="e#5299#6190#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="254">
+          <caret line="311" column="28" lean-forward="true" selection-start-line="311" selection-start-column="28" selection-end-line="313" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/user.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="100" column="60" selection-start-line="100" selection-start-column="60" selection-end-line="100" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/create_profile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="387">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rest/PersistenceManager.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="166">
+          <caret line="230" column="26" lean-forward="true" selection-start-line="230" selection-start-column="26" selection-end-line="230" selection-end-column="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/rest/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="19" column="86" selection-start-line="19" selection-start-column="86" selection-end-line="19" selection-end-column="86" />
+        <state relative-caret-position="153">
+          <caret line="18" selection-start-line="18" selection-end-line="30" selection-end-column="3" />
           <folding>
             <element signature="e#6#84#0#PHP" expanded="true" />
           </folding>

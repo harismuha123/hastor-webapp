@@ -49,6 +49,17 @@ Flight::route('POST /login', function(){
     }
 });
 
+Flight::route('GET /osnovne', function() {
+    Flight::json(Flight::pm()->get_all_middle_schools());
+});
+
+Flight::route('GET /srednje', function() {
+    Flight::json(Flight::pm()->get_all_high_schools());
+});
+
+Flight::route('GET /fakulteti', function() {
+    Flight::json(Flight::pm()->get_all_universities());
+});
 
 Flight::route('GET /front_page', function() {
     Flight::json(Flight::frontpage()->get_data());
