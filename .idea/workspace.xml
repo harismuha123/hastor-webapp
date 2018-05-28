@@ -3,12 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="df6d4af1-114b-457a-8368-f735cfcea373" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/create_profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/create_profile.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/user.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/user.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest/Config.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/rest/Config.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest/PersistenceManager.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/rest/PersistenceManager.class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rest/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/rest/index.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -46,11 +41,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="102" column="29" selection-start-line="102" selection-start-column="29" selection-end-line="102" selection-end-column="29" />
+            <state relative-caret-position="170">
+              <caret line="598" column="36" selection-start-line="598" selection-start-column="36" selection-end-line="598" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -64,7 +59,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Config.class.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Config.class.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/rest/Config.class.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="85">
@@ -201,8 +196,8 @@
         <option value="$PROJECT_DIR$/rest/PersistenceManager.class.php" />
         <option value="$PROJECT_DIR$/pages/user.html" />
         <option value="$PROJECT_DIR$/pages/admins.html" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/rest/Config.class.php" />
+        <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
   </component>
@@ -372,7 +367,7 @@
       <workItem from="1526804737074" duration="22000" />
       <workItem from="1526907584464" duration="624000" />
       <workItem from="1526981955465" duration="166796000" />
-      <workItem from="1527498065919" duration="15578000" />
+      <workItem from="1527498065919" duration="15851000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1521469453030</created>
@@ -577,11 +572,25 @@
       <option name="project" value="LOCAL" />
       <updated>1527508159890</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="successfully completed adding new users to database">
+      <created>1527514868468</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1527514868468</updated>
+    </task>
+    <task id="LOCAL-00031" summary="fixed slight error when logging off">
+      <created>1527515008276</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1527515008276</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="331973000" />
+    <option name="totallyTimeSpent" value="332246000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1366" height="732" extended-state="6" />
@@ -640,8 +649,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/spapp" />
     </ignored-roots>
-    <MESSAGE value="added stylesheet and script file" />
-    <MESSAGE value="idea files added" />
     <MESSAGE value="added Klorofil template" />
     <MESSAGE value="added Klorofil assets" />
     <MESSAGE value="updated folder structure" />
@@ -665,7 +672,9 @@
     <MESSAGE value="successfully fully completed JWT authentication process, added ajax prefilter for headers to all requests" />
     <MESSAGE value="added workaround for Heroku" />
     <MESSAGE value="created routes for getting cities, schools and universities, remodeled user creation form" />
-    <option name="LAST_COMMIT_MESSAGE" value="created routes for getting cities, schools and universities, remodeled user creation form" />
+    <MESSAGE value="successfully completed adding new users to database" />
+    <MESSAGE value="fixed slight error when logging off" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed slight error when logging off" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -898,17 +907,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="102" column="29" selection-start-line="102" selection-start-column="29" selection-end-line="102" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/rest/Config.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" selection-start-line="5" selection-end-line="8" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="598" column="36" selection-start-line="598" selection-start-column="36" selection-end-line="598" selection-end-column="36" />
         </state>
       </provider>
     </entry>

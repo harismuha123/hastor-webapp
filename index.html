@@ -594,8 +594,10 @@
         }
 
         function logout(){
-            Utils.clear_cache();
-            window.location=".";
+            if(confirm("Jeste li sigurni?")) {
+                Utils.clear_cache();
+                window.location=".";
+            }
         }
 
 	</script>
