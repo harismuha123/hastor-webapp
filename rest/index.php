@@ -163,6 +163,29 @@ Flight::route('POST /kreiraj_najavu', function () {
     Flight::pm()->add_mentor($dataArray);
 });
 
+Flight::route('POST /kreiraj_korisnika', function () {
+    $userstatus = Flight::request()->data->userstatus;
+    $isAdmin = 0;
+    if($userstatus === "Administracija") {
+        $isAdmin = 1;
+    }
+    $city = Flight::request()->data->city;
+    $school = Flight::request()->data->school;
+    $schoolArray = explode(" ", $school);
+    $cityArray = explode(" ", $city);
+    $request = Flight::request();
+    $input = array(
+        "username" => $request->data->username,
+        "password" => $request->data->password,
+        "email" => $request->data->email,
+        "first_name" => $request->data->first_name,
+        "last_name" => $request->data->last_name,
+        "date_joined" => $request->data->date_joined,
+        "is_staff" => $isAdmin
+    );
+    Flight::pm()->create_user($input);
+});
+
 Flight::route('POST /kreiraj_izvjestaj', function () {
     $student = Flight::request()->data->volunteer;
     $request = Flight::request();

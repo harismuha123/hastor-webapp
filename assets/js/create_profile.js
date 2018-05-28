@@ -7,6 +7,24 @@ function validateMatchPwd(value, element) {
 
 $(document).ready(function () {
 
+    $.get("rest/gradovi", function (data) {
+        $.each(data, function (index, item) {
+            $('#citiesList').append(
+                $('<option></option>').val(item.id + " - " + item.city).html(item.id + " - " + item.city)
+            );
+        });
+    });
+
+    $(['osnovne', 'srednje', 'fakulteti']).each(function (index, type) {
+        $.get("rest/"+type, function (data) {
+            $.each(data, function (index, item) {
+                $('#'+type+'-skole').append(
+                    $('<option></option>').val(item.id + " - " + item.name).html(item.id + " - " + item.name)
+                );
+            });
+        });
+    });
+
     $("#profile-form").validate({
         rules: {
             first_name: {
@@ -27,8 +45,17 @@ $(document).ready(function () {
                 minlength: 5
             }
         },
-        submitHandler(form) {
-
+        submitHandler: function(form) {
+            if (confirm('Da li ste sigurni da želite nastaviti?')){
+                $.post('rest/kreiraj_korisnika', $('#profile-form').serialize(), function(){
+                    $('#profile-form').trigger('reset');
+                    $(['osnovci', 'srednjoskolci', 'studenti']).each(function (index, name) {
+                        $('#'+name+'-table').DataTable().ajax.reload();
+                    });
+                    alert("Uspješno pregledan izvještaj!");
+                });
+                return false;
+            }
         }
     });
 

@@ -242,6 +242,46 @@ class PersistenceManager {
         $query = "SELECT id, name FROM Universities";
         return $this->pdo->query($query)->fetchAll();
     }
+
+    public function create_user($input) {
+        $query = "INSERT INTO Users(username, 
+                                    password, 
+                                    email, 
+                                    first_name,
+                                    last_name,
+                                    date_joined,
+                                    is_staff)
+                   VALUES(:username, :password, :email, :first_name, :last_name, :date_joined, :is_staff)";
+        $statement = $this->pdo->prepare($query);
+        $statement->execute($input);
+        $user_id = $this->pdo->lastInsertId();
+        return $user_id;
+    }
+
+    public function create_student($input) {
+        $query = "INSERT INTO UniversityStudents(name,
+                                                 surname,
+                                                 fathers_name,
+                                                 email,
+                                                 tel1,
+                                                 address,
+                                                 date_of_birth,
+                                                 university_id,
+                                                 city_id,
+                                                 user_id)
+                   VALUES(:name,
+                          :surname,
+                          :fathers_name,
+                          :email,
+                          :tel1,
+                          :address,
+                          :date_of_birth,
+                          :facility_id,
+                          :city_id,
+                          :user_id)";
+        $statement = $this->pdo->prepare($query);
+        $statement->execute($input);
+    }
 }
 
 ?>

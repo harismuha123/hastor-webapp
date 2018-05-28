@@ -7,6 +7,10 @@ class Config
         'username' => 'harismuha123',
         'password' => 'FHSarajevo2018',
         'scheme' => 'hastor'
+//        'host' => 'localhost',
+//        'username' => 'root',
+//        'password' => 'mysql',
+//        'scheme' => 'hastor'
     ];
 
     const JWT_SECRET = 'secret';
