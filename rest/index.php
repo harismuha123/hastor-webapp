@@ -18,22 +18,7 @@ Flight::register('pm', 'PersistenceManager', [Config::DB]);
 
 Flight::before('start', function(&$params, &$output) {
     if (!(Flight::request()->url == '/login' && Flight::request()->method == 'POST')){
-        $jwt = getallheaders()['hastor-jwt'];
-        if (!function_exists('getallheaders'))
-        {
-            function getallheaders()
-            {
-                $headers = [];
-                foreach ($_SERVER as $name => $value)
-                {
-                    if (substr($name, 0, 5) == 'HTTP_')
-                    {
-                        $headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
-                    }
-                }
-                return $headers;
-            }
-        ;}
+        $jwt = $_SERVER["HTTP_HASTOR_JWT"];
         try {
             $decoded = (array)JWT::decode($jwt, Config::JWT_SECRET, ['HS256']);
             $decoded['user'] = (array)$decoded['user'];
